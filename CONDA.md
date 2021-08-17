@@ -1,3 +1,14 @@
+- [Anaconda Guide](#anaconda-guide)
+  - [Environments](#environments)
+    - [1. Using Someone Else's Code](#1-using-someone-elses-code)
+    - [2. Maintaining Backward Compatibility for Your Own Code](#2-maintaining-backward-compatibility-for-your-own-code)
+    - [3. Sharing Environments With Collaborators](#3-sharing-environments-with-collaborators)
+  - [Getting Started](#getting-started)
+  - [New Base Environment](#new-base-environment)
+  - [Existing Environments](#existing-environments)
+    - [Cloning An Existing Environment](#cloning-an-existing-environment)
+    - [Table of Environments](#table-of-environments)
+
 # Anaconda Guide
 
 Anaconda (usually shortened to "conda") is a package and environment management system for Python targeted towards the scientific community. We have our own custom version of conda available to us in the CwC lab on the `babbage` server and we have the ability to share environments between lab members. Conda allows us to:
