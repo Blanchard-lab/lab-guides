@@ -1,11 +1,11 @@
 - [Anaconda Guide](#anaconda-guide)
-  - [Environments](#environments)
+  - [Getting Started](#getting-started)
+  - [Introduction to Environments](#introduction-to-environments)
     - [1. Using Someone Else's Code](#1-using-someone-elses-code)
     - [2. Maintaining Backward Compatibility for Your Own Code](#2-maintaining-backward-compatibility-for-your-own-code)
     - [3. Sharing Environments With Collaborators](#3-sharing-environments-with-collaborators)
-  - [Getting Started](#getting-started)
   - [New Base Environment](#new-base-environment)
-  - [Existing Environments](#existing-environments)
+  - [Pre-Configured Environments](#pre-configured-environments)
     - [Cloning An Existing Environment](#cloning-an-existing-environment)
     - [Table of Environments](#table-of-environments)
 
@@ -17,26 +17,6 @@ Anaconda (usually shortened to "conda") is a package and environment management 
 - Install our own packages into these environments
 - Store environments and packages on `babbage` so they **do not** take up home directory space
 - Share pre-built environments for our projects so others can get going faster
-
-## Environments
-
-Conda environments are self-contained Python installations containing packages, scripts, and environment variables needed to run a project. Different environments can have different versions of packages that would normally conflict if you tried to install them all at once on your machine. This can even include having different versions of Python, CUDA libraries, Tensorflow or PyTorch.
-
-Creating new environments or cloning existing environments is **cheap and fast** in conda because conda makes use of links to packages.
-
-The goal is to **create an environment for each project**. Ideally, this would mean having a conda environment per git repository you use. There are several use cases for this:
-
-### 1. Using Someone Else's Code
-
-Many paper authors are now publishing a `requirements.txt` or an `environment.yml` file in their repositories that contain a list of necessary packages and versions to help people get up and running faster. By creating a new, isolated environment when using that repository we can install whatever crazy custom versions and packages the original authors used without fear of breaking our own projects.
-
-### 2. Maintaining Backward Compatibility for Your Own Code
-
-With our own projects, maintaining one environment per project means we don't have to worry about maintaining backwards compatibility with older projects when we move on to new projects. The speed of development of core libraries like Tensorflow or PyTorch is lightning fast. Even minor revision changes in libraries regularly break things. By maintaining separate environments for each project, we know we can freeze the versions in time so we can easily return months or years later. Have a codebase that still uses Tensorflow 1, but you are currently working with a bleeding edge Tensorflow 2.X? No problem, just switch back to the old environments.
-
-### 3. Sharing Environments With Collaborators
-
-With our shared environment structure, it makes it really easy for collaborators to get up and running. Once the the primary author has an environment setup, all a collaborator needs to do is activate that environment and they are all set!
 
 ## Getting Started
 
@@ -75,11 +55,31 @@ It is recommended from here to completely log out and log back into the machine 
 
 The `(base)` prefix indicates that conda is active and that you are currently working in the "base" environment.
 
+## Introduction to Environments
+
+Conda environments are self-contained Python installations containing packages, scripts, and environment variables needed to run a project. Different environments can have different versions of packages that would normally conflict if you tried to install them all at once on your machine. This can even include having different versions of Python, CUDA libraries, Tensorflow or PyTorch.
+
+Creating new environments or cloning existing environments is **cheap and fast** in conda because conda makes use of links to packages.
+
+The goal is to **create an environment for each project**. Ideally, this would mean having a conda environment per git repository you use. There are several use cases for this:
+
+### 1. Using Someone Else's Code
+
+Many paper authors are now publishing a `requirements.txt` or an `environment.yml` file in their repositories that contain a list of necessary packages and versions to help people get up and running faster. By creating a new, isolated environment when using that repository we can install whatever crazy custom versions and packages the original authors used without fear of breaking our own projects.
+
+### 2. Maintaining Backward Compatibility for Your Own Code
+
+With our own projects, maintaining one environment per project means we don't have to worry about maintaining backwards compatibility with older projects when we move on to new projects. The speed of development of core libraries like Tensorflow or PyTorch is lightning fast. Even minor revision changes in libraries regularly break things. By maintaining separate environments for each project, we know we can freeze the versions in time so we can easily return months or years later. Have a codebase that still uses Tensorflow 1, but you are currently working with a bleeding edge Tensorflow 2.X? No problem, just switch back to the old environments.
+
+### 3. Sharing Environments With Collaborators
+
+With our shared environment structure, it makes it really easy for collaborators to get up and running. Once the the primary author has an environment setup, all a collaborator needs to do is activate that environment and they are all set!
+
 ## New Base Environment
 
 > :warning: **WARNING:** For those of you already using the department's version of Anaconda, there are some differences with the new CwC `(base)` environment. 
 
-An effort has been made to include many of the same packages as were previously available with the department's base environment. There are some differences:
+An effort has been made to include many of the same packages as were previously available with the department's `(base)` environment. There are some differences:
 
 - Package version numbers are different and **will change over time!**
 - Default channel is `conda-forge`, which may have newer versions of packages that are less stable
@@ -87,7 +87,8 @@ An effort has been made to include many of the same packages as were previously 
 - PyTorch GPU acceleration is working but, **Tensorflow GPU acceleration is not**
   - This is an issue with the conda package repository. If you need Tensorflow GPU support with CUDA 11, please see the `tf25-cuda11-pip` pre-built environment for CUDA 11 GPU accelerated support.
 
-## Existing Environments
+
+## Pre-Configured Environments
 
 In addition to the base environment, several other environments have been setup that are available for use. The get a full listing of available environments use the command:
 
@@ -100,7 +101,7 @@ conda env list
 Only the owners of an environment can modify it, but if you wish to use an existing environment as a base for a project you can clone an environment:
 
 ```
-conda create -n {NEW_NAME} --clone {EXISTING_NAME}
+conda create -n {NEW_NAME} --clone {OLD_NAME}
 ```
 
 ### Table of Environments
@@ -108,8 +109,8 @@ conda create -n {NEW_NAME} --clone {EXISTING_NAME}
 Name|Major Package Versions|Notes
 :---|:---|:---
 py27|python=2.7|
-tf1-cuda10|python=3.7, tensorflow-gpu=1.15.0, cudatoolkit=10.0|CUDA 11 support unavailable
-tf24-cuda10|python=3.9, tensorflow-gpu=2.4.1, cudatoolkit=10.1|No supported on RTX 30XX
+tf1-cuda10|python=3.7, tensorflow-gpu=1.15.0, cudatoolkit=10.0|No CUDA 11 support for TF1 at this time
+tf24-cuda10|python=3.9, tensorflow-gpu=2.4.1, cudatoolkit=10.1|CUDA 10 not supported on RTX 30XX
 tf25-cuda11-pip|python=3.8, tensorflow-gpu=2.5, cudatoolkit=11.2|ONLY USE PIP FOR PACKAGES
 torch18-cuda11|python=3.8, pytorch=1.8-lts, cudatoolkit=11.1|PyTorch LTS branch
-torch19-cuda11|python=3.8, pytorch=1.9, cudatoolkit=11.1|
+torch19-cuda11|python=3.8, pytorch=1.9, cudatoolkit=11.1|PyTorch Stable branch
