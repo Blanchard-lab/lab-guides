@@ -142,7 +142,7 @@ $   conda deactivate
 ```bash
 $   conda env list
 ```
-* To remove an environment (Please be careful and do not remove as `rm -r`): :
+* To remove an environment (Please be careful and do not remove as `rm -r`):
 ```bash
 $   conda env remove -n {ENV_NAME}
 ```
