@@ -1,3 +1,7 @@
+## **⚠️ This guide is deprecated and no longer supported.**
+Please refer to the [**README.md**](./README.md) file for the most up-to-date instructions and guidance.
+
+
 - [Anaconda Guide](#anaconda-guide)
   - [Getting Started](#getting-started)
   - [Introduction to Environments](#introduction-to-environments)
