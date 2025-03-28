@@ -98,7 +98,7 @@ With our shared environment structure, it makes it really easy for collaborators
 
 ## Details on Environment
 
-## New Base Environment
+### New Base Environment
 
 > :warning: **WARNING:** For those of you already using the department's version of Anaconda, there are some differences with the new IMPACT `(base)` environment. 
 
